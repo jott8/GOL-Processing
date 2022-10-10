@@ -3,12 +3,14 @@ Grid GRID = new Grid(N);
 Grid NEXTGEN;
 boolean EDITING = true;
 boolean RUNNING = !EDITING;
+boolean themeIsLight = true;
 
 void setup() {
   
   size(800, 800);
   background(0);
   
+  GRID.setTheme(themeIsLight);
   GRID.drawMe();
   
 }
@@ -17,6 +19,7 @@ void draw() {
   
   if(RUNNING) {
    GRID = GRID.getNextGen();
+   GRID.setTheme(themeIsLight);
    GRID.drawMe();
    delay(100);
   }
@@ -39,6 +42,7 @@ void keyPressed() {
   // Clear grid in editing mode
   if(EDITING && key == 'c' || key == 'C') {
    GRID = new Grid(N);
+   GRID.setTheme(themeIsLight);
    GRID.drawMe();
   }
   
@@ -52,7 +56,8 @@ void keyPressed() {
   // Change theme, light->dark, dark->light
   if(EDITING && key == 't' || key == 'T') {
     
-    GRID.themeSetDark();
+    themeIsLight = !themeIsLight;
+    GRID.setTheme(themeIsLight);
     GRID.drawMe();
     
   }
@@ -60,6 +65,7 @@ void keyPressed() {
   // one step forward
   if(EDITING && key == 's' || key == 'S') {
     GRID = GRID.getNextGen();
+    GRID.setTheme(themeIsLight);
     GRID.drawMe();
   }
   
@@ -69,6 +75,7 @@ void keyPressed() {
     clear();
      N+=10;
      GRID = new Grid(N);
+     GRID.setTheme(themeIsLight);
      GRID.drawMe();
      println(N);
    }
@@ -79,6 +86,7 @@ void keyPressed() {
      clear();
      N-=10;
      GRID = new Grid(N);
+     GRID.setTheme(themeIsLight);
      GRID.drawMe();
      println(N);
    }
