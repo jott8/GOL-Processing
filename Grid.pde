@@ -37,78 +37,26 @@ class Grid {
 
   }
   
-  void themeSetDark() {
-   if(lightTheme) {
-     lightTheme = !lightTheme;
-     
-     colorDead = 0;
-     colorAlive = color(255, 153, 204);
-     strokeColor = 255;
-     
-     println("Done!"); 
-   }
-  }
-  
-  void printGrid() {
-   
-    for(int x = 1; x < n-1; x++) {
-      for(int y = 1; y < n-1; y++) {
-        if(cells[x][y].state) {
-         print(1 + " "); 
-        }
-        else {  
-          print(0 + " ");
-        }
-      }
-      println();
-     } 
-  }
-  
-  void printNeighbours() {
-    
-    
-    for(int x = 1; x < n-1; x++) {
-      for(int y = 1; y < n-1; y++) {
-        
-       print(countAliveNeighbours(cells[x][y]) + " "); 
-      }
-      println();
-     }
-  }
-  
   void drawMe() {
     float squareWidth = width/n;
   
     for(int x = 0; x < n; x++) {
-      for(int y = 0; y < n; y++) {
-     
-        
+      for(int y = 0; y < n; y++) {          
         stroke(strokeColor);
      
-        if(!cells[x][y].state) { // wenn state == true --> Zelle lebt
+        if(!cells[x][y].state) {
           fill(colorDead);  
         }
         else{
           fill(colorAlive); 
-        }
-        
+        } 
         if(cells[x][y].state) {
-         //print(1 + " "); 
         }
         else {
-         //print(0 + " "); 
         }
-         
-         
         rect(x*squareWidth, y*squareWidth, squareWidth, squareWidth);     
       }
-      //println();
     }
-    
-  }
-  
-  void clearMe() {
-    
   }
   
   void updateEditing() {
@@ -124,13 +72,10 @@ class Grid {
       }
       drawMe();
     }
-    
-    
   }
  
   int countAliveNeighbours(Cell cell) {
     int count = 0;
-    
     // Zeile darueber
         if(cell.yPos >= 1) {
             for(int i = cell.xPos-1 ; i <= cell.xPos+1 ; i++) {
@@ -164,7 +109,6 @@ class Grid {
     Cell cell = cells[x][y];
     
     int neighbours = countAliveNeighbours(cell);
-    // println(x +  "    " + y + "    " + neighbours);
    
     if(cell.state){
       if(neighbours == 2 || neighbours == 3) {
@@ -188,11 +132,8 @@ class Grid {
      nextGrid.cells[x][y].setState(this.willSurvive(x, y));
     }
   }
-  
    return nextGrid;
  }
- 
- 
 }
 
   

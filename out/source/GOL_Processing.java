@@ -23,24 +23,20 @@ boolean RUNNING = !EDITING;
 boolean themeIsLight = true;
 
  public void setup() {
-  
   /* size commented out by preprocessor */;
   background(0);
   
   GRID.setTheme(themeIsLight);
   GRID.drawMe();
-  
 }
 
  public void draw() {
-  
   if(RUNNING) {
    GRID = GRID.getNextGen();
    GRID.setTheme(themeIsLight);
    GRID.drawMe();
    delay(100);
   }
-  
 }
 
  public void mousePressed() {
@@ -48,14 +44,9 @@ boolean themeIsLight = true;
   if(EDITING) {
     GRID.updateEditing();
   }
-  
-  
-  
 }
 
  public void keyPressed() {
- 
-  
   // Clear grid in editing mode
   if(EDITING && key == 'c' || key == 'C') {
    GRID = new Grid(N);
@@ -72,11 +63,9 @@ boolean themeIsLight = true;
   
   // Change theme, light->dark, dark->light
   if(EDITING && key == 't' || key == 'T') {
-    
     themeIsLight = !themeIsLight;
     GRID.setTheme(themeIsLight);
     GRID.drawMe();
-    
   }
   
   // one step forward
@@ -97,8 +86,6 @@ boolean themeIsLight = true;
      println(N);
    }
    
-   
-   
    if(N > 10 && keyCode == 40) {
      clear();
      N-=10;
@@ -107,17 +94,19 @@ boolean themeIsLight = true;
      GRID.drawMe();
      println(N);
    }
-   
   }
-  
+
   // Exit program
   if(key == 'x' || key == 'X') {
     exit(); 
-  }
-  
+  } 
 }
-   
-  
+
+
+// up = true --> N+=, up = false --> N-=
+ public void updateN(boolean up) {
+
+}
 class Cell {
   
  int xPos;
@@ -183,78 +172,26 @@ class Grid {
 
   }
   
-   public void themeSetDark() {
-   if(lightTheme) {
-     lightTheme = !lightTheme;
-     
-     colorDead = 0;
-     colorAlive = color(255, 153, 204);
-     strokeColor = 255;
-     
-     println("Done!"); 
-   }
-  }
-  
-   public void printGrid() {
-   
-    for(int x = 1; x < n-1; x++) {
-      for(int y = 1; y < n-1; y++) {
-        if(cells[x][y].state) {
-         print(1 + " "); 
-        }
-        else {  
-          print(0 + " ");
-        }
-      }
-      println();
-     } 
-  }
-  
-   public void printNeighbours() {
-    
-    
-    for(int x = 1; x < n-1; x++) {
-      for(int y = 1; y < n-1; y++) {
-        
-       print(countAliveNeighbours(cells[x][y]) + " "); 
-      }
-      println();
-     }
-  }
-  
    public void drawMe() {
     float squareWidth = width/n;
   
     for(int x = 0; x < n; x++) {
-      for(int y = 0; y < n; y++) {
-     
-        
+      for(int y = 0; y < n; y++) {          
         stroke(strokeColor);
      
-        if(!cells[x][y].state) { // wenn state == true --> Zelle lebt
+        if(!cells[x][y].state) {
           fill(colorDead);  
         }
         else{
           fill(colorAlive); 
-        }
-        
+        } 
         if(cells[x][y].state) {
-         //print(1 + " "); 
         }
         else {
-         //print(0 + " "); 
         }
-         
-         
         rect(x*squareWidth, y*squareWidth, squareWidth, squareWidth);     
       }
-      //println();
     }
-    
-  }
-  
-   public void clearMe() {
-    
   }
   
    public void updateEditing() {
@@ -270,13 +207,10 @@ class Grid {
       }
       drawMe();
     }
-    
-    
   }
  
    public int countAliveNeighbours(Cell cell) {
     int count = 0;
-    
     // Zeile darueber
         if(cell.yPos >= 1) {
             for(int i = cell.xPos-1 ; i <= cell.xPos+1 ; i++) {
@@ -310,7 +244,6 @@ class Grid {
     Cell cell = cells[x][y];
     
     int neighbours = countAliveNeighbours(cell);
-    // println(x +  "    " + y + "    " + neighbours);
    
     if(cell.state){
       if(neighbours == 2 || neighbours == 3) {
@@ -334,11 +267,8 @@ class Grid {
      nextGrid.cells[x][y].setState(this.willSurvive(x, y));
     }
   }
-  
    return nextGrid;
  }
- 
- 
 }
 
   
