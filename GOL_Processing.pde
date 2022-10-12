@@ -45,7 +45,7 @@ void keyPressed() {
   }
   
   // Change theme, light->dark, dark->light
-  if(EDITING && key == 't' || key == 'T') {
+  if(key == 't' || key == 'T') {
     themeIsLight = !themeIsLight;
     GRID.setTheme(themeIsLight);
     GRID.drawMe();
@@ -66,7 +66,7 @@ void keyPressed() {
      GRID = new Grid(N);
      GRID.setTheme(themeIsLight);
      GRID.drawMe();
-     println(N);
+     println("New N = " + N);
    }
    
    if(N > 10 && keyCode == 40) {
@@ -75,7 +75,7 @@ void keyPressed() {
      GRID = new Grid(N);
      GRID.setTheme(themeIsLight);
      GRID.drawMe();
-     println(N);
+     println("New N = " + N);
    }
   }
 

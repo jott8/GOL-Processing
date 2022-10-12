@@ -25,14 +25,14 @@ class Grid {
      
      colorDead = 255;
      colorAlive = 0;
-     strokeColor = 150; 
+     strokeColor = 100; 
     }
     if(!isLight) {
      lightTheme = !lightTheme;
      
      colorDead = 0;
      colorAlive = color(255, 153, 204);
-     strokeColor = 255; 
+     strokeColor = 100; 
     }
 
   }
